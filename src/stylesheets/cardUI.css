@@ -1,0 +1,130 @@
+/*
+.card{  
+    display: flex;
+    background-color: #ffffff;
+    min-width: max-content;
+    min-height: 30vh;
+    font-size: 1rem;
+    border-radius: 1rem;
+    padding: 2vh 3.5vw 2vh;
+    margin: 3vh 2vw 3.5vh;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between; 
+    
+    transition: box-shadow .3s ease-out;
+}
+*/
+
+.card, .jumbotron {
+    background: #fff;
+    border: 1px solid rgba(44,49,54,.15);
+    border-radius: 20px;
+    margin-bottom: 40px;
+    text-decoration: none;
+    transition: box-shadow .3s ease-out;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 18vh;
+}
+.card li {
+    list-style-type: none; 
+}
+.card:hover, .cardform:hover, .cardlogin:hover, .jumbotron:hover{
+    box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.253) !important;
+}
+
+.card-title {
+    text-align: center;
+}
+.card-body {
+    padding:1rem !important;
+    text-align: left;
+}
+.card-body ul{
+    margin-bottom: 2rem;
+}
+
+.buttons {
+display: flex;
+justify-content: space-between;
+align-items: baseline;
+margin: 40px 0 20px;
+}
+
+a:last-of-type .linkback{
+    font-size: 17px;
+    line-height: 20px;
+    color: #ff0000;
+    position: relative;
+    padding-right: 10px;
+    margin-top: 15px;
+}
+.message .linkback{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.cardbutton{
+    padding: 1rem 1rem 2rem;
+}
+
+
+.cardform {
+    background: #fff;
+    border: 1px solid rgba(44,49,54,.15);
+    border-radius: 20px;
+    margin-bottom: 40px;
+    text-decoration: none;
+    transition: box-shadow .3s ease-out;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-content: center;
+    justify-content: space-between;
+    padding: 2rem;
+}
+
+.userform{
+    align-items: center;
+    width: 50%;
+}
+
+
+
+.cardlogin {
+    background: #fff;
+    margin: 2rem auto 3rem;
+    padding: 1rem;
+    
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+
+    justify-content: space-between;
+    
+    border: 1px solid rgba(44,49,54,.15);
+    border-radius: 20px;
+    margin-bottom: 40px;
+    text-decoration: none;
+    transition: box-shadow .3s ease-out;
+
+  width: 25rem;
+  margin: 3rem auto;
+}
+
+
+.profile-img-card {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}

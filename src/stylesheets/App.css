@@ -1,0 +1,55 @@
+html,body, #root{
+  background-color: #f7f7f7;
+  height: 100%;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+.jumbotron{
+  margin-bottom: 2rem;
+}
+.inform{
+  margin: 1rem 0 2rem;
+  padding: 2rem;
+}
+
+
+.navbar-nav{
+  cursor: default;
+    margin: 0 15px;
+    width: auto;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    user-select: none;
+    align-items: center
+}
+.nav-item{
+  box-sizing: border-box;
+  display: inline-block;
+  position: relative;
+  
+}
+.navbar-expand {
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+nav a{
+    display: block;
+    color: white;
+    font-size: 20px;
+    font-weight: lighter;
+    text-decoration: none;
+    transition: 0.3s;
+}
+nav a:hover {
+  color: #B8B8B8;
+}
+
+
+
+
