@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from 'axios';
 
-const API_URL = "http://localhost:8080/user";
+const API_URL = 'http://localhost:8080/user';
 
 
 class AdminService {
@@ -17,12 +17,13 @@ class AdminService {
     return axios.get(API_URL + `?username=${username}`);
   };
 
-  addUser(username, email, phone, password) {
-    return axios.post(API_URL + "/adduser", {
+  addUser(username, email, phone, password, role) {
+    return axios.post(API_URL + '/adduser', {
       username,
       email,
       phone,
       password,
+      role
     });
   }
 

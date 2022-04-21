@@ -1,0 +1,48 @@
+.projectlist {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: flex-start;
+    
+}
+
+.projectadd {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: flex-start;
+    
+}
+
+
+.head, .title, .icon {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    flex-direction: row;    
+}
+
+
+.icon:visited,.icon:active,.icon:hover  { 
+    color: #000000; 
+    text-decoration: none; 
+} 
+
+
+.button-delete, .button-add{
+    outline: none !important;
+    border: 0 !important;    
+}
+
+.head>.icon>.button-delete>img, .head>.icon>.button-add>img {
+    width: 40%;
+}
+
+.head>.icon>img, .title>img{
+    width: 25%;
+}
+
+

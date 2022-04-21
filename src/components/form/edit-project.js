@@ -1,34 +1,32 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
 
-import AdminService from '../../services/admin.service';
+import ProjectService from '../../services/project.service';
 
 import '../../stylesheets/App.css';
 import '../../stylesheets/cardUI.css';
 
-const EditUser = (props) =>{
-        const initialUserlState = {
-            id_user: null,
-            username: '',
-            email: '',
-            phone: '',
-            password: ''
+const EditProject = (props) =>{
+        const initialProjectlState = {
+            id_project: null,
+            title: '',
+            date_start: '',
+            date_end: '',
         };
 
-        const [user, setUser]= useState(initialUserlState);
+        const [project, setProject]= useState(initialProjectlState);
         const [message, setMessage] = useState('');
         
         const form = useRef();
         const checkBtn = useRef();
 
-        const findOne = id_user => {
-            AdminService.findOne(id_user)
+        const findOne = id_project => {
+            ProjectService.findOne(id_project)
             .then(responce => {
-                setUser(responce.data);
+                setProject(responce.data);
                 console.log(responce.data);
             })
             .cath(e => {
@@ -37,15 +35,15 @@ const EditUser = (props) =>{
         };
 
         useEffect(() => {
-            findOne(props.id_user);
-        },[props.id_user]);
+            findOne(props.id_project);
+        },[props.id_project]);
 
         const handleInputChange = event => {
             const { name, value } = event.target;
-            setUser({ ...user, [name]: value });
+            setProject({ ...project, [name]: value });
         };
-        const updateUser = () => {
-            AdminService.update(user.id_user, user)
+        const updateProject = () => {
+            ProjectService.update(project.id_project, project)
                 .then(response => {
                     console.log(response.data);
                     setMessage(message);
@@ -56,57 +54,45 @@ const EditUser = (props) =>{
             };
 
         return (
-            <div className='container-sm userform'>
+            <div className='container-sm projectform'>
                 <Form className='cardform' ref={form}>
                 <>
                     <div className='form-group'>
-                    <label htmlFor='username'>Логин</label>
+                    <label htmlFor='title'>Название проекта</label>
                         <Input
                             type='text'
                             className='form-control'
-                            name='username'
-                            value={user.username}
+                            name='title'
+                            value={project.title}
                             onChange={handleInputChange}
                         />
                     </div>
 
                     <div className='form-group'>
-                    <label htmlFor='email'>Email</label>
+                    <label htmlFor='date_start'>Дата начала</label>
                         <Input
-                            type='text'
+                            type='date'
                             className='form-control'
-                            name='email'
-                            value={user.email}
+                            name='date_start'
+                            value={project.date_start}
                             onChange={handleInputChange}
                         />
                     </div>
 
                     <div className='form-group'>
-                    <label htmlFor='phone'>Номер телефона</label>
+                    <label htmlFor='date_end'>Дата окончания</label>
                         <Input
-                            type='text'
+                            type='date'
                             className='form-control'
-                            name='phone'
-                            value={user.phone}
-                            onChange={handleInputChange}
-                        />
-                    </div>
-
-
-                    <div className='form-group'>
-                    <label htmlFor='password'>Пароль</label>
-                        <Input
-                            type='password'
-                            className='form-control'
-                            name='password'
-                            value={user.password}
+                            name='date_end'
+                            value={project.date_end}
                             onChange={handleInputChange}
                         />
                     </div>
 
                     <div className='form-group buttons'>
-                        <button className='btn btn-outline-success' onClick={updateUser}>Обновить</button>
-                        <Link className='linkback' to='/user' >Вернуться назад</Link>    
+                        <button className='btn btn-outline-success' onClick={updateProject}>Обновить</button>
+                        <Link className='linkback' to='/project' >Вернуться назад</Link>                       
                     </div>
                 </>
 
@@ -117,4 +103,4 @@ const EditUser = (props) =>{
         );
 };
 
-export default EditUser
+export default EditProject

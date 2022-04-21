@@ -1,17 +1,17 @@
-import React, { useState, useRef } from "react";
-import Form from "react-validation/build/form";
-import Input from "react-validation/build/input";
-import CheckButton from "react-validation/build/button";
+import React, { useState, useRef } from 'react';
 import { useNavigate  } from 'react-router-dom';
+import Form from 'react-validation/build/form';
+import Input from 'react-validation/build/input';
+import CheckButton from 'react-validation/build/button';
+import AuthService from '../services/auth.service';
 
-import AuthService from "../services/auth.service";
-import "../stylesheets/cardUI.css";
-
+import '../stylesheets/cardUI.css';
+import avatar from '../materials/avatar.png';
 
 const required = (value) => {
   if (!value) {
     return (
-      <div className="alert alert-danger" role="alert">
+      <div className='alert alert-danger' role='alert'>
         Поле обязательно для заполнения.
       </div>
     );
@@ -22,9 +22,9 @@ const Login = (props) => {
   const form = useRef();
   const checkBtn = useRef();
 
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [message, setMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
   const onChangeUsername = (e) => {
@@ -43,7 +43,7 @@ const Login = (props) => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    setMessage("");
+    setMessage('');
     setLoading(true);
     form.current.validateAll();
 
@@ -70,56 +70,56 @@ const Login = (props) => {
   };
 
   return (
-    <div className="col-md-12">
-      <div className="cardlogin">
-        <img src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" alt="profile-img" className="profile-img-card" />
+    <div className='col-md-12'>
+      <div className='cardlogin'>
+        <img src={avatar} alt='profile-img' className='profile-img-card' / >
 
         <Form onSubmit={handleLogin} ref={form}>
         
         
           
-          <div className="form-group">
-            <label htmlFor="username">Логин</label>
+          <div className='form-group'>
+            <label htmlFor='username'>Логин</label>
             <Input
-              type="text"
-              className="form-control"
-              name="username"
+              type='text'
+              className='form-control'
+              name='username'
               value={username}
               onChange={onChangeUsername}
               validations={[required]}
             />
           </div>
 
-          <div className="form-group">
-          <label htmlFor="password">Пароль</label>
+          <div className='form-group'>
+          <label htmlFor='password'>Пароль</label>
             <Input
-              type="password"
-              className="form-control"
+              type='password'
+              className='form-control'
             
-              name="password"
+              name='password'
               value={password}
               onChange={onChangePassword}
               validations={[required]}
             />
           </div>
 
-          <div className="form-group buttons">
-            <button className="btn btn-outline-success w-100" disabled={loading}>
+          <div className='form-group buttons'>
+            <button className='btn btn-outline-success w-100' disabled={loading}>
               {loading && (
-                <span className="spinner-border spinner-border-sm"></span>
+                <span className='spinner-border spinner-border-sm'></span>
               )}
               <span>Войти</span>
             </button>
           </div>
 
           {message && (
-            <div className="form-group">
-              <div className="alert alert-danger" role="alert">
+            <div className='form-group'>
+              <div className='alert alert-danger' role='alert'>
                 {message}
               </div>
             </div>
           )}
-          <CheckButton style={{ display: "none" }} ref={checkBtn} />
+          <CheckButton style={{ display: 'none' }} ref={checkBtn} />
         </Form>
         
       </div>
