@@ -2,21 +2,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import ProjectCardUI from './project-cardUI';
 import Trash from '../../materials/icons/trash.png';
-import Add from '../../materials/icons/add-black.png';
+import Add from '../../materials/icons/icon-add.png';
 
 import '../../stylesheets/projectUI.css';
-import ProjectCarddUI from './project-cardUI';
 
-const ProjectBoardUI = (props) => {
+const ProjectBoardUI = props => {
     
     return(
-        <>
+        <div className='col-md-3 chapter'>
             <div className='head'>
                 <h5>{props.title}</h5>
 
                 <div className='icon'>
-                    <button  onClick={props.linkDEL} className='button-delete'>
+                    <button className='button-delete' onClick={props.linkDEL}>
                         <img src={Trash} alt='del' />
                     </button>
 
@@ -27,10 +27,16 @@ const ProjectBoardUI = (props) => {
 
             </div>
 
-            <div className='task'>
-                <ProjectCarddUI />
+            <div className='col-body'>
+
+                <ProjectCardUI 
+                    title={props.cardTitle}
+                    start={`Дата начала: ${props.cardStart}`}
+                    end={`Дата окончания: ${props.cardEnd}`}
+                    
+                    />
             </div>
-        </>
+        </div>
     );
 }
 

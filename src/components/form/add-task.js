@@ -26,9 +26,9 @@ const AddTaskForm = () =>{
         const checkBtn = useRef();
 
         const [title, setTitle] = useState('')
-        const [project, setProject] = useState('')
+        const [project, setProject] = useState('1')
         const [status, setStatus] = useState('') 
-        const [createdAt, setCreatedAt] = useState('')
+        const [date_start, setDateStart] = useState('')
         const [date_end, setDateEnd] = useState('')
 
         const [successful, setSuccessful] = useState(false);
@@ -38,9 +38,9 @@ const AddTaskForm = () =>{
             const title = e.target.value;
             setTitle(title);
         };
-        const onChangeCreatedAt = (e) => {
-            const createdAt = e.target.value;
-            setCreatedAt(createdAt);
+        const onChangeDateStart = (e) => {
+            const date_start = e.target.value;
+            setDateStart(date_start);
         };
         const onChangeDateEnd = (e) => {
             const date_end = e.target.value;
@@ -52,7 +52,7 @@ const AddTaskForm = () =>{
         setSuccessful(false);
         form.current.validateAll();
         if (checkBtn.current.context._errors.length === 0) {
-            TaskService.addTask(title, project, status, createdAt, date_end).then((response) => {
+            TaskService.addTask(title, project, status, date_start, date_end).then((response) => {
                 setMessage(response.data.message);
                 setSuccessful(true);
             },
@@ -88,13 +88,13 @@ const AddTaskForm = () =>{
                     </div>
                     
                     <div className='form-group'>
-                    <label htmlFor='createdAt'>Дата начала</label>
+                    <label htmlFor='date_start'>Дата начала</label>
                         <Input
                             type='date'
                             className='form-control'
-                            name='createdAt'
-                            value={createdAt}
-                            onChange={onChangeCreatedAt}
+                            name='date_start'
+                            value={date_start}
+                            onChange={onChangeDateStart}
                             validations={[required]}
                         />
                     </div>

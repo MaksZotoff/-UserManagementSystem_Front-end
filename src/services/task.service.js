@@ -17,11 +17,12 @@ class TaskService {
     };
 
 
-    addProject(title, status, createdAt, date_end) {
+    addTask(title, id_project, status, date_start, date_end) {
         return axios.post(API_URL + '/addtask', {
             title, 
+            id_project,
             status, 
-            createdAt, 
+            date_start, 
             date_end
         });
     }

@@ -10,13 +10,13 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    min-height: 18vh;
-    min-width: 18vh;
+    min-height: 14vh;
+    min-width: 14vh;
 }
 .card li {
     list-style-type: none; 
 }
-.card:hover, .cardform:hover, .cardlogin:hover, .jumbotron:hover, .usertable:hover{
+.card:hover, .cardform:hover, .cardlogin:hover, .jumbotron:hover, .usertable:hover, .projecttable:hover{
     box-shadow: 5px 10px 20px 1px rgba(0, 0, 0, 0.253) !important;
 }
 
@@ -80,18 +80,29 @@ margin: 40px 0 20px;
     width: 50%;
 }
 
-.usertable {
+
+.usertable, .projecttable{
     display: flex;
-    max-width: 30rem;
-    background: #fff;
     border: 1px solid rgba(44,49,54,.15);
     border-radius: 20px;
     text-decoration: none;
     transition: box-shadow .3s ease-out;
-    flex-direction: column;
     flex-wrap: nowrap;
-    align-content: flex-start;
-  }
+    align-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem;
+}
+
+.usertable {
+    max-width: 40rem;
+    margin-right: 4rem;
+}
+.projecttable {
+    width: 20rem;
+    height: fit-content;
+}
 
 .new-card{
     background-color: transparent;

@@ -138,7 +138,7 @@ const App = () => {
               </div>
       </nav>
 
-            <div className='container mx-auto mt-5'>
+            <div className='main mx-3 mt-5'>
               <Routes>
                 <Route exact path='/' element={<Home/>} />
                 <Route exact path='/login' element={<Login/>} />
@@ -148,7 +148,6 @@ const App = () => {
 
                 <Route exact path ='/user' element={<UserBoard/>} />
                 <Route exact path='/project' element={<ProjectBoard/>} />                
-                <Route exact path='/task' element={<TaskBoard/>} />   
 
                 <Route exact path='/adduser' element={<AddUserForm/>} />
                 <Route exact path='/addproject' element={<AddProjectForm/>} />

@@ -1,27 +1,53 @@
-import React from 'react';
-import '../../stylesheets/projectUI.css';
-import CheckComplete from '../../materials/icons/check-circle-complete.png';
+import React, { useState, useEffect, useRef } from 'react';
+import TaskService from '../../services/task.service';
 
-const ProjectCardUI = props => {
-    
+import Delete from '../../materials/icons/delete-black.png';
+import CheckComplete from '../../materials/icons/check-circle.png';
+import '../../stylesheets/projectUI.css';
+
+const ProjectCard = props => {
+    const [tasks, setTasks] = useState([]);
+
+    const tasksRef = useRef();
+    tasksRef.current = tasks ;
+
+    useEffect(() => {
+        retrieveTasks();
+    }, []);
+
+    const retrieveTasks  = async() => {
+        const responce = await TaskService.findAll()
+        setTasks(responce.data);
+    };
+
+
     return(
-            <div className='task'>
+        <>
+        { tasks.map((task, id_project) =>{
+            return(
+            <div className='task' key={id_project}>
                 <div className='card'>
                     <div className='title'>
                         <img src={CheckComplete} alt='button-add' />
-                        <h5>{props.title}</h5>
+                        <img src={Delete} alt='button-delete' />
+                        
+                        <h5>{task.title}</h5>
                     </div>
-                    <div class="text-muted">
-                        <h6>2 days ago</h6>
-                        <h6>2 days ago</h6>
+                    <div className="text-muted">
+                        <h6>{task.date_start}</h6>
+                        <h6>{task.date_end}</h6>
                     </div>
                     
                 </div>
-            </div>
+            </div>    
+            )         
+        })}
+        </>
+        
     );
 }
 
-export default ProjectCardUI
+export default ProjectCard
 
 
 
