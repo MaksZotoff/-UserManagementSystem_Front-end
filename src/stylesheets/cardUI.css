@@ -34,12 +34,15 @@
     text-decoration: none;
 }
 
-
 .buttons {
 display: flex;
 justify-content: space-between;
 align-items: baseline;
 margin: 40px 0 20px;
+}
+
+#projectbuttons{
+    margin: 10px;
 }
 
 .linkback:last-of-type, .linkback{

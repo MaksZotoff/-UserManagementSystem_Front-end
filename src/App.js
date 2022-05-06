@@ -18,18 +18,18 @@ import NotFound from './components/notFound.component'
 
 import BoardAdmin from './components/board/admin-board.component';
 import UserBoard from './components/board/user-board.component';
-import ProjectBoard from './components/board/project-board.component'
+import ProjectBoard from './components/board/project-board.component';
 import TaskBoard from './components/board/task-board.component';
 
 import AddUserForm from './components/form/add-user';
-import EditUser from './components/form/edit-user';
-
 import AddProjectForm from './components/form/add-project';
-import EditProject from './components/form/edit-project';
-
 import AddTaskForm from './components/form/add-task';
+
+import EditUser from './components/form/edit-user';
+import EditProject from './components/form/edit-project';
 import EditTask from './components/form/edit-project';
 
+import Task from './components/card/taskUI';
 
 const App = () => {
   const [showAdminBoard, setShowAdminBoard] = useState(false);
@@ -81,11 +81,15 @@ const App = () => {
                   <li className='nav-item'> 
                       <Link to={'/admin'} className='nav-link'>Панель управления</Link> 
                   </li>
-                </div>
 
-                <div className='navbar-nav'>
                   <li className='nav-item'> 
                       <Link to={'/user'} className='nav-link'>Сотрудники</Link> 
+                  </li>
+                </div>
+                
+                <div className='navbar-nav'>
+                  <li className='nav-item'> 
+                      <Link to={'/task'} className='nav-link'>Задачи</Link> 
                   </li>
                 </div>
               </>
@@ -106,8 +110,7 @@ const App = () => {
                         <li className='nav-item'> 
                             <Link to={'/profile'} className='nav-link'> Профиль</Link>
                         </li>
-                </div>
-                <div className='navbar-nav'>
+
                         <li className='nav-item'> 
                             <a href='/login' className='nav-link' onClick={logOut}>Выйти</a>
                         </li>
@@ -147,16 +150,19 @@ const App = () => {
                 <Route exact path='/admin' element={<BoardAdmin/>} />
 
                 <Route exact path ='/user' element={<UserBoard/>} />
+                <Route exact path='/task' element={<TaskBoard/>}/>                
                 <Route exact path='/project' element={<ProjectBoard/>} />                
 
                 <Route exact path='/adduser' element={<AddUserForm/>} />
                 <Route exact path='/addproject' element={<AddProjectForm/>} />
                 <Route exact path='/addtask' element={<AddTaskForm/>} />
 
-                <Route exact path='/update/:id' element={<EditUser/>} />      
-                <Route exact path='/update/:id' element={<EditProject/>} />            
-      
+                <Route exact path='/user/update/:id' element={<EditUser/>} />      
+                <Route exact path='/project/update/:id' element={<EditProject/>} />            
+                <Route exact path='/task/update/:id' element={<Task/>}/>
+                
                 <Route exact path='*' element={<NotFound/>} />
+
               </Routes>
             </div>
       </>

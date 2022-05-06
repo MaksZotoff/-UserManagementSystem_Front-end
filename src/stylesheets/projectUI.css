@@ -45,18 +45,23 @@
     text-decoration: none; 
 } 
 
-
 .button-delete, .button-add{
     outline: none !important;
     border: 0 !important;    
 }
 
-.head>.icon>.button-delete>img, .head>.icon>.button-add>img {
+.head>.icon>.button-delete>img, .head>.icon>.button-add>img{
     width: 40%;
 }
-
-.head>.icon>img, .title>img{
+.title>.button-delete>img, .title>.button-add>img{
+    width: 80%;
+}
+.head>.icon>img {
     width: 10%;
 }
 
 
+.taskpassive{
+    background-color: violet;
+
+}

@@ -1,11 +1,11 @@
 import React, { useState, useRef } from 'react';
 import {Link} from 'react-router-dom';
 
+import TaskService from '../../services/task.service';
+
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
-
-import TaskService from '../../services/task.service';
 
 import '../../stylesheets/App.css';
 import '../../stylesheets/cardUI.css';
@@ -20,19 +20,18 @@ const required = (value) => {
     }
 };
 
-
 const AddTaskForm = () =>{
-        const form = useRef();
-        const checkBtn = useRef();
+    const form = useRef();
+    const checkBtn = useRef();
+    const [title, setTitle] = useState('');
 
-        const [title, setTitle] = useState('')
-        const [project, setProject] = useState('1')
-        const [status, setStatus] = useState('') 
+    const [successful, setSuccessful] = useState(false);
+    const [message, setMessage] = useState('');
+
+        const [project, setProject] = useState(1)
+        const [relevant, setRelevant] = useState(true) 
         const [date_start, setDateStart] = useState('')
         const [date_end, setDateEnd] = useState('')
-
-        const [successful, setSuccessful] = useState(false);
-        const [message, setMessage] = useState('');
 
         const onChangeTitle = (e) => {
             const title = e.target.value;
@@ -52,7 +51,7 @@ const AddTaskForm = () =>{
         setSuccessful(false);
         form.current.validateAll();
         if (checkBtn.current.context._errors.length === 0) {
-            TaskService.addTask(title, project, status, date_start, date_end).then((response) => {
+            TaskService.addTask(title, project, relevant, date_start, date_end).then((response) => {
                 setMessage(response.data.message);
                 setSuccessful(true);
             },
@@ -117,14 +116,14 @@ const AddTaskForm = () =>{
                     </div>
                 </div>
                 )}
-                    {message && (
-                        <div className='form-group message'>
-                            <div className={ successful ? 'alert alert-success' : 'alert alert-danger' } role='alert'>
-                                {message}
-                            </div>
-                            <Link className='linkback' to='/project' >Вернуться назад</Link>    
+                {message && (
+                    <div className='form-group message'>
+                        <div className={ successful ? 'alert alert-success' : 'alert alert-danger' } role='alert'>
+                            {message}
                         </div>
-                    )}
+                        <Link className='linkback' to='/project' >Вернуться назад</Link>    
+                    </div>
+                )}
                 <CheckButton style={{ display: 'none' }} ref={checkBtn}/>
                 </Form>
             </div>

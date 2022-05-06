@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ProjectService from '../../services/project.service';
-import '../../stylesheets/cardUI.css';
 import Table from 'react-bootstrap/Table'
+import '../../stylesheets/cardUI.css';
 
 const ProjectTable = () => {
     const [projects, setProjects] = useState([]);
@@ -35,6 +35,7 @@ const ProjectTable = () => {
                         )}
                     </tbody>
                 </Table>
+
             </div>
         </>
 

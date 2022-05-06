@@ -6,7 +6,7 @@ import Trash from '../../materials/icons/trash.png';
 import Add from '../../materials/icons/add-black.png';
 
 import '../../stylesheets/projectUI.css';
-import ProjectCarddUI from './project-cardUI';
+import TaskCard from './task-cardUI';
 
 const ProjectBoardUI = (props) => {
     
@@ -28,7 +28,7 @@ const ProjectBoardUI = (props) => {
             </div>
 
             <div className='task'>
-                <ProjectCarddUI />
+                <TaskCard />
             </div>
         </>
     );

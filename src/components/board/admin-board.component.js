@@ -80,14 +80,17 @@ export default BoardAdmin
 */
 
 import React, { useState, useEffect } from 'react';
-import InformCardUI from '../card/inform-cardUI';
-import UserTable from '../table/user-table';
-import ProjectTable from '../table/project-table';
-import '../../stylesheets/cardUI.css';
 
 import AdminService from '../../services/admin.service';
 import TaskService from '../../services/task.service';
 import ProjectService from '../../services/project.service';
+
+import InformCardUI from '../card/inform-cardUI';
+import UserTable from '../table/user-table';
+import ProjectTable from '../table/project-table';
+import UserChart from '../chart/user-chart';
+
+import '../../stylesheets/cardUI.css';
 
 
 const BoardAdmin = () => {
@@ -135,7 +138,7 @@ const BoardAdmin = () => {
                 <UserTable/>
                 <ProjectTable/>
             </div>
-
+            <UserChart/>
         </>
     );
 };
