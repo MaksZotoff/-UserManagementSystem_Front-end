@@ -20,6 +20,7 @@ import BoardAdmin from './components/board/admin-board.component';
 import UserBoard from './components/board/user-board.component';
 import ProjectBoard from './components/board/project-board.component';
 import TaskBoard from './components/board/task-board.component';
+import BriefBoard from './components/board/brief-board.component';
 
 import AddUserForm from './components/form/add-user';
 import AddProjectForm from './components/form/add-project';
@@ -85,9 +86,7 @@ const App = () => {
                   <li className='nav-item'> 
                       <Link to={'/user'} className='nav-link'>Сотрудники</Link> 
                   </li>
-                </div>
-                
-                <div className='navbar-nav'>
+
                   <li className='nav-item'> 
                       <Link to={'/task'} className='nav-link'>Задачи</Link> 
                   </li>
@@ -99,6 +98,10 @@ const App = () => {
                 <div className='navbar-nav'>
                   <li className='nav-item'> 
                       <Link to={'/project'} className='nav-link'>Проекты</Link>  
+                  </li>
+
+                  <li className='nav-item'> 
+                      <Link to={'/todo'} className='nav-link'>Список задач</Link>  
                   </li>
                 </div>
               )}
@@ -148,10 +151,10 @@ const App = () => {
                 <Route exact path='/profile' element={<Profile/>} />
 
                 <Route exact path='/admin' element={<BoardAdmin/>} />
-
                 <Route exact path ='/user' element={<UserBoard/>} />
                 <Route exact path='/task' element={<TaskBoard/>}/>                
-                <Route exact path='/project' element={<ProjectBoard/>} />                
+                <Route exact path='/project' element={<ProjectBoard/>} /> 
+                <Route exact path='/todo' element={<BriefBoard/>}/>               
 
                 <Route exact path='/adduser' element={<AddUserForm/>} />
                 <Route exact path='/addproject' element={<AddProjectForm/>} />

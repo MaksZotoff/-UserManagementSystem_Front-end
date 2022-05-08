@@ -8,7 +8,7 @@ import CheckCompleteTrue from '../../materials/icons/check-circle-complete.png';
 import CheckCompleteFalse from '../../materials/icons/check-circle.png';
 import '../../stylesheets/projectUI.css';
 
-const TaskList = props => {
+const TaskList = () => {
     const [tasks, setTasks] = useState([]);
     const [currentTask, setCurrentTask] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(-1);
@@ -40,7 +40,7 @@ const TaskList = props => {
         TaskService.remove(currentTask.id_task)
             .then(response => {
             console.log(response.data);
-            navigate("/task");
+            retrieveTasks();
         })
         .catch(e => {
             console.log(e);
@@ -66,7 +66,15 @@ const TaskList = props => {
                             </li>
                         ))}
                 </ul>
+
+                <div className='form-group buttons'>
+                    <Link to={"/addtask/" } className="btn btn-outline-success">
+                        Добавить задачу
+                    </Link>
+                </div>
+
             </div>
+
 
             <div className="col-md-4">
 

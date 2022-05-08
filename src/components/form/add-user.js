@@ -54,6 +54,8 @@ const vpassword = (value) => {
     }
 };
 
+
+
 const AddUserForm = () =>{
         const form = useRef();
         const checkBtn = useRef();
@@ -77,14 +79,17 @@ const AddUserForm = () =>{
             const phone = e.target.value;
             setPhone(phone);
         };
+
         const onChangeRole = (e) => {
             const role = e.target.value;
             setRole(role);
         };
+
         const onChangePassword = (e) => {
             const password = e.target.value;
             setPassword(password);
         };
+
         
         const handleRegister = (e) => {
             e.preventDefault();
@@ -108,13 +113,14 @@ const AddUserForm = () =>{
                 );
             }
         };
+      
         
     function ListItem(props) {
         return <option>{props.value}</option>;
     };
 
     function RoleList(props) {
-        const listItems = props.roles.map((name_role, id_role) => 
+        const listItems = roles.map((name_role, id_role) => 
             <ListItem key={id_role} value={name_role} />
         );
         return (
@@ -173,7 +179,7 @@ const AddUserForm = () =>{
                             onChange={onChangeRole} 
                             validations={[required]} 
                         >
-                        <RoleList roles={roles}/>
+                            <RoleList />
                         </Select>
                     </div>
 

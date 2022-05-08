@@ -8,6 +8,13 @@
 .chapter{
     margin: auto;
 }
+
+.chapter-active{
+    border: 2px dashed lightcoral;
+    border-radius: 15px;
+    margin: auto;
+}
+
 .card{
     display: flex;
     flex-direction: column;
