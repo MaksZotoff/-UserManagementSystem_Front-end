@@ -11,18 +11,12 @@ import CheckCompleteFalse from '../../materials/icons/check-circle.png';
 import '../../stylesheets/projectUI.css';
 
 const TaskCard = props => {
-    const { id_task }= useParams();
-    
-    const CheckComplete = {CheckCompleteTrue, CheckCompleteFalse}
-    const [relevant, setRelevant] = useState(CheckComplete.CheckCompleteFalse)
+
+    const CheckComplete = {CheckCompleteTrue, CheckCompleteFalse};
+    const [relevant, setRelevant] = useState(CheckComplete.CheckCompleteFalse);
     const [tasks, setTasks] = useState([]);
-    const [task, setTask] = useState(null)
-
-    const tasksRef = useRef();
-    const taskRef = useRef();
-    tasksRef.current = tasks ;
-    taskRef.current = task ;
-
+    const [currentTask, setCurrentTask] = useState(null);
+    const [currentIndex, setCurrentIndex] = useState(-1);
 
     useEffect(() => {
         retrieveTasks();
@@ -32,14 +26,19 @@ const TaskCard = props => {
         const responce = await TaskService.findAll()
         setTasks(responce.data);
     };
+
+    const setActiveTask = (task, index) => {
+        setCurrentTask(task);
+        setCurrentIndex(index);
+    };
+
     const updateRelevant =(status)=>{
         var data = {
-            id_task: id_task,
             relevant: status
         }
-        TaskService.update(id_task, data)
+        TaskService.update(currentTask.id_task, data)
         .then( responce=>{
-            setTask({...task, relevant: status});
+            setCurrentTask({...currentTask, relevant: status});
             console.log(responce.data);
         })
         .catch(e=>{
@@ -48,15 +47,25 @@ const TaskCard = props => {
         setRelevant(CheckComplete.CheckCompleteTrue);
     };
     
-    const deleteTask = async () => {
-        await TaskService.remove(id_task);
+    const deleteTask = (task, index) => {
+        TaskService.remove(currentTask.id_task)
+            .then(response => {
+            console.log(response.data);
+            retrieveTasks();
+        })
+        .catch(e => {
+            console.log(e);
+        });
     };
        
     return(
         <>
-            { tasks.map((task, id_task) =>(
-                <div className='task' >
-                    <div className='card' key={id_task}>
+            { tasks.map((task, index) =>(
+                <div className='task'>
+                    <div className={'card' + (index === currentIndex ? ' active': '')}
+                        key={index}
+                        onClick={()=> setActiveTask(task, index) }
+                    >
                         <div className='title'>
                             <button className='button-add' onClick={()=> {updateRelevant(false)} }>
                                 <img src={relevant} alt='button-add' />

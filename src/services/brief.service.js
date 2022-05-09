@@ -1,8 +1,7 @@
 import axios from 'axios';
-
 const API_URL = 'http://localhost:8080/brief';
 
-class TaskService {
+class BriefService {
 
     findAll() {
         return axios.get(API_URL + `/`);
@@ -16,13 +15,8 @@ class TaskService {
         return axios.get(API_URL + `?title=${title}`);
     };
 
-    addTask(title, id_user, status, createdAt) {
-        return axios.post(API_URL + '/addbrief', {
-            title, 
-            id_user,
-            status, 
-            createdAt,
-        });
+    addBrief(data) {
+        return axios.post(API_URL + '/addbrief', data); 
     }
 
     update(id_brief, data) {
@@ -35,6 +29,6 @@ class TaskService {
 
 }
 
-export default new TaskService()
+export default new BriefService()
 
 

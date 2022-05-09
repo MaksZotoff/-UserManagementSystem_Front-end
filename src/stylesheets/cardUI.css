@@ -83,6 +83,12 @@ margin: 40px 0 20px;
     width: 50%;
 }
 
+.submitform{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+
+}
 
 .usertable, .projecttable{
     display: flex;

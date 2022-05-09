@@ -14,7 +14,6 @@ const TaskList = () => {
     const [currentIndex, setCurrentIndex] = useState(-1);
     
     const { id_task }= useParams();
-    let navigate = useNavigate();
 
     useEffect(() => {
         retrieveTasks();
