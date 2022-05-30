@@ -17,13 +17,16 @@ class AdminService {
     return axios.get(API_URL + `?username=${username}`);
   };
 
-  addUser(username, email, phone, password, role) {
+  addUser(username, name, surname, email, phone, password, role, salary) {
     return axios.post(API_URL + '/adduser', {
       username,
+      name,
+      surname,
       email,
       phone,
       password,
-      role
+      role,
+      salary,
     });
   }
 

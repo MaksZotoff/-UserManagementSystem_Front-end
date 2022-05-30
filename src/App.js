@@ -83,6 +83,9 @@ const App = () => {
                       <Link to={'/admin'} className='nav-link'>Панель управления</Link> 
                   </li>
 
+                  </div>
+
+                  <div className='navbar-nav'>
                   <li className='nav-item'> 
                       <Link to={'/user'} className='nav-link'>Сотрудники</Link> 
                   </li>

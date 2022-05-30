@@ -60,6 +60,9 @@ const AddUserForm = () =>{
         const form = useRef();
         const checkBtn = useRef();
         const [username, setUsername] = useState('');
+        const [name, setName] = useState('');
+        const [surname, setSurname] = useState('');
+        const [salary, setSalary] = useState('');
         const [email, setEmail] = useState('');
         const [phone, setPhone] = useState('');
         const [role, setRole] = useState('');
@@ -67,6 +70,18 @@ const AddUserForm = () =>{
         const [successful, setSuccessful] = useState(false);
         const [message, setMessage] = useState('');
 
+        const onChangeName = (e) => {
+            const name = e.target.value;
+            setName(name);
+        };
+        const onChangeSurname = (e) => {
+            const surname = e.target.value;
+            setSurname(surname);
+        };
+        const onChangeSalary = (e) => {
+            const salary = e.target.value;
+            setSalary(salary);
+        };
         const onChangeUsername = (e) => {
             const username = e.target.value;
             setUsername(username);
@@ -96,7 +111,7 @@ const AddUserForm = () =>{
             setSuccessful(false);
             form.current.validateAll();
             if (checkBtn.current.context._errors.length === 0) {
-                AdminService.addUser(username, email, phone, password, role).then((response) => {
+                AdminService.addUser(username, name, surname, salary, email, phone, password, role).then((response) => {
                     setMessage(response.data.message);
                     setSuccessful(true);
                 },
@@ -135,6 +150,28 @@ const AddUserForm = () =>{
                 <Form className='cardform' onSubmit={handleRegister} ref={form}>
                 {!successful && (
                 <div>
+                <div className='form-group'>
+                    <label htmlFor='name'>Имя</label>
+                        <Input
+                            type='text'
+                            className='form-control'
+                            name='name'
+                            value={name}
+                            onChange={onChangeName}
+                            validations={[required, vusername]}
+                        />
+                    </div>
+                    <div className='form-group'>
+                    <label htmlFor='surname'>Фамилия</label>
+                        <Input
+                            type='text'
+                            className='form-control'
+                            name='surname'
+                            value={surname}
+                            onChange={onChangeSurname}
+                            validations={[required, vusername]}
+                        />
+                    </div>
                     <div className='form-group'>
                     <label htmlFor='username'>Логин</label>
                         <Input

@@ -10,7 +10,6 @@ import '../../stylesheets/cardUI.css';
 const UserBoard = () =>{
 
         const [users, setUsers] = useState([]);
-        
         const usersRef = useRef();
         usersRef.current = users;
 
@@ -36,7 +35,7 @@ const UserBoard = () =>{
                             return (
                                 <div className='col-md-3' key={id_user}>                                   
                                     <UserCardUI 
-                                        name={user.username} 
+                                    
                                         email={user.email} 
                                         phone={user.phone} 
                                         linkUPD={`/user/update/${user.id_user}`} 

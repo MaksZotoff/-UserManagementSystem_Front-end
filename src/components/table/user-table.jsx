@@ -23,17 +23,24 @@ const UserTable = () => {
                 <Table striped bordered hover responsive>
                     <thead >
                         <tr >
+                            <th >Имя</th>
+                            <th >Фамилия</th>
                             <th >Логин</th>
                             <th >Электронная почта</th>
                             <th >Номер телефона</th>
+                            <th >Зарплата</th>
+
                         </tr>
                     </thead>
                     <tbody >
                         {users.map((users) =>
                             <tr key={users.id_user}>
+                                <td>{users.name}</td>
+                                <td>{users.surname}</td>
                                 <td>{users.username}</td>
                                 <td>{users.email}</td>
                                 <td>{users.phone}</td>
+                                <td>{users.salary}</td>
                             </tr>
                         )}
                     </tbody>

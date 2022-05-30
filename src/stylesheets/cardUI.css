@@ -105,7 +105,7 @@ margin: 40px 0 20px;
 }
 
 .usertable {
-    width: 40rem;
+    width: fit-content;
     margin-right: 4rem;
 }
 .projecttable {
