@@ -22,13 +22,13 @@ const BriefTable = () => {
             });
     };
 
-    const setActiveBrief = (task, index) => {
-        setCurrentBrief(task);
+    const setActiveBrief = (brief, index) => {
+        setCurrentBrief(brief);
         setCurrentIndex(index);
     };
 
     const deleteBrief = () => {
-        BriefService.remove(currentBrief.id_task)
+        BriefService.remove(currentBrief.id_brief)
             .then(response => {
                 console.log(response.data);
                 retrieveBriefs();

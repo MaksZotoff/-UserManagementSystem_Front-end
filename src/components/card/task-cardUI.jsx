@@ -14,9 +14,11 @@ const TaskCard = props => {
 
     const CheckComplete = { CheckCompleteTrue, CheckCompleteFalse };
     const [relevant, setRelevant] = useState(CheckComplete.CheckCompleteFalse);
+    const [task, setTask] = useState(null);
+
     const [tasks, setTasks] = useState([]);
     const [currentTask, setCurrentTask] = useState(null);
-    const [currentIndex, setCurrentIndex] = useState(-1);
+    const [currentIndex, setCurrentIndex] = useState(0);
 
     useEffect(() => {
         retrieveTasks();
@@ -32,13 +34,13 @@ const TaskCard = props => {
         setCurrentIndex(index);
     };
 
-    const updateRelevant = (status, task, ) => {
+    const updateRelevant = (status, currentTask, index, task ) => {
         var data = {
             relevant: status
         }
-        TaskService.update(currentTask.id_task, data)
+        TaskService.update(currentTask, data)
             .then(responce => {
-                setCurrentTask({ ...currentTask, relevant: status });
+                setCurrentTask({ ...task, relevant: status });
                 console.log(responce.data);
             })
             .catch(e => {
@@ -47,7 +49,7 @@ const TaskCard = props => {
         setRelevant(CheckComplete.CheckCompleteTrue);
     };
 
-    const deleteTask = (task, index) => {
+    const deleteTask = () => {
         TaskService.remove(currentTask.id_task)
             .then(response => {
                 console.log(response.data);
@@ -60,9 +62,9 @@ const TaskCard = props => {
 
     return (
         <>
-            {tasks.map((task, index) => (
-                <div className='task' key={index}>
-                    <div className={'card' + (index === currentIndex ? ' active' : '')}
+            {tasks && tasks.map((task, index) => (
+                <div className={'task' + (index === currentIndex ? ' active' : '')} key={index}>
+                    <div className={'card'}
                         
                         onClick={() => setActiveTask(task, index)}
                     >
