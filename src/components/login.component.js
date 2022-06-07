@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { useNavigate  } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import CheckButton from 'react-validation/build/button';
@@ -38,7 +38,7 @@ const Login = (props) => {
   };
 
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
 
   const handleLogin = (e) => {
@@ -48,36 +48,36 @@ const Login = (props) => {
     form.current.validateAll();
 
 
-  if (checkBtn.current.context._errors.length === 0) {
-    AuthService.login(username, password).then(
-      () => {
-        navigate('/profile')
+    if (checkBtn.current.context._errors.length === 0) {
+      AuthService.login(username, password).then(
+        () => {
+          navigate('/profile')
           window.location.reload();
         },
         (error) => {
-          const resMessage = 
-              (error.responce && 
-              error.response.data && 
-              error.response.data.message) || 
-              error.message || 
-              error.toString();
+          const resMessage =
+            (error.responce &&
+              error.response.data &&
+              error.response.data.message) ||
+            error.message ||
+            error.toString();
 
-              setLoading(false);
-              setMessage(resMessage);
+          setLoading(false);
+          setMessage(resMessage);
         }
-    );
-  } else { setLoading(false); }
+      );
+    } else { setLoading(false); }
   };
 
   return (
     <div className='col-md-12'>
       <div className='cardlogin'>
-        <img src={avatar} alt='profile-img' className='profile-img-card' / >
+        <img src={avatar} alt='profile-img' className='profile-img-card' />
 
         <Form onSubmit={handleLogin} ref={form}>
-        
-        
-          
+
+
+
           <div className='form-group'>
             <label htmlFor='username'>Логин</label>
             <Input
@@ -91,11 +91,11 @@ const Login = (props) => {
           </div>
 
           <div className='form-group'>
-          <label htmlFor='password'>Пароль</label>
+            <label htmlFor='password'>Пароль</label>
             <Input
               type='password'
               className='form-control'
-            
+
               name='password'
               value={password}
               onChange={onChangePassword}
@@ -121,7 +121,7 @@ const Login = (props) => {
           )}
           <CheckButton style={{ display: 'none' }} ref={checkBtn} />
         </Form>
-        
+
       </div>
     </div>
   );

@@ -35,9 +35,14 @@ const UserBoard = () =>{
                             return (
                                 <div className='col-md-3' key={id_user}>                                   
                                     <UserCardUI 
+                                    username={user.username}
+                                    surname={user.surname} 
+                                    email={user.email} 
+                                    name={user.name} 
                                     
-                                        email={user.email} 
-                                        phone={user.phone} 
+                                    phone={user.phone} 
+                                    salary={user.salary} 
+                                        link={`/user/${user.id_user}`}
                                         linkUPD={`/user/update/${user.id_user}`} 
                                         linkDEL={deleteUser}
                                     />

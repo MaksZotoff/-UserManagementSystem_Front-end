@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import AdminService from '../../services/admin.service';
 
@@ -13,6 +13,7 @@ import { isEmail } from 'validator';
 
 import '../../stylesheets/App.css';
 import '../../stylesheets/cardUI.css';
+import { InputGroup } from 'react-bootstrap';
 
 const required = (value) => {
     if (!value) {
@@ -56,86 +57,86 @@ const vpassword = (value) => {
 
 
 
-const AddUserForm = () =>{
-        const form = useRef();
-        const checkBtn = useRef();
-        const [username, setUsername] = useState('');
-        const [name, setName] = useState('');
-        const [surname, setSurname] = useState('');
-        const [salary, setSalary] = useState('');
-        const [email, setEmail] = useState('');
-        const [phone, setPhone] = useState('');
-        const [role, setRole] = useState('');
-        const [password, setPassword] = useState('');
-        const [successful, setSuccessful] = useState(false);
-        const [message, setMessage] = useState('');
+const AddUserForm = () => {
+    const form = useRef();
+    const checkBtn = useRef();
+    const [username, setUsername] = useState('');
+    const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
+    const [salary, setSalary] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [role, setRole] = useState('');
+    const [password, setPassword] = useState('');
+    const [successful, setSuccessful] = useState(false);
+    const [message, setMessage] = useState('');
 
-        const onChangeName = (e) => {
-            const name = e.target.value;
-            setName(name);
-        };
-        const onChangeSurname = (e) => {
-            const surname = e.target.value;
-            setSurname(surname);
-        };
-        const onChangeSalary = (e) => {
-            const salary = e.target.value;
-            setSalary(salary);
-        };
-        const onChangeUsername = (e) => {
-            const username = e.target.value;
-            setUsername(username);
-        };
-        const onChangeEmail = (e) => {
-            const email = e.target.value;
-            setEmail(email);
-        };
-        const onChangePhone = (e) => {
-            const phone = e.target.value;
-            setPhone(phone);
-        };
+    const onChangeName = (e) => {
+        const name = e.target.value;
+        setName(name);
+    };
+    const onChangeSurname = (e) => {
+        const surname = e.target.value;
+        setSurname(surname);
+    };
+    const onChangeSalary = (e) => {
+        const salary = e.target.value;
+        setSalary(salary);
+    };
+    const onChangeUsername = (e) => {
+        const username = e.target.value;
+        setUsername(username);
+    };
+    const onChangeEmail = (e) => {
+        const email = e.target.value;
+        setEmail(email);
+    };
+    const onChangePhone = (e) => {
+        const phone = e.target.value;
+        setPhone(phone);
+    };
 
-        const onChangeRole = (e) => {
-            const role = e.target.value;
-            setRole(role);
-        };
+    const onChangeRole = (e) => {
+        const role = e.target.value;
+        setRole(role);
+    };
 
-        const onChangePassword = (e) => {
-            const password = e.target.value;
-            setPassword(password);
-        };
+    const onChangePassword = (e) => {
+        const password = e.target.value;
+        setPassword(password);
+    };
 
-        
-        const handleRegister = (e) => {
-            e.preventDefault();
-            setSuccessful(false);
-            form.current.validateAll();
-            if (checkBtn.current.context._errors.length === 0) {
-                AdminService.addUser(username, name, surname, salary, email, phone, password, role).then((response) => {
-                    setMessage(response.data.message);
-                    setSuccessful(true);
-                },
+
+    const handleRegister = (e) => {
+        e.preventDefault();
+        setSuccessful(false);
+        form.current.validateAll();
+        if (checkBtn.current.context._errors.length === 0) {
+            AdminService.addUser(email, phone, password, role, username, name, surname, salary).then((response) => {
+                setMessage(response.data.message);
+                setSuccessful(true);
+            },
                 (error) => {
                     const resMessage =
                         (error.response &&
-                        error.response.data &&
-                        error.response.data.message) ||
+                            error.response.data &&
+                            error.response.data.message) ||
                         error.message ||
                         error.toString();
-                        setMessage(resMessage);
-                        setSuccessful(false);
+                    setMessage(resMessage);
+                    setSuccessful(false);
                 }
-                );
-            }
-        };
-      
-        
+            );
+        }
+    };
+
+
     function ListItem(props) {
         return <option>{props.value}</option>;
     };
 
     function RoleList(props) {
-        const listItems = roles.map((name_role, id_role) => 
+        const listItems = roles.map((name_role, id_role) =>
             <ListItem key={id_role} value={name_role} />
         );
         return (
@@ -145,113 +146,120 @@ const AddUserForm = () =>{
 
     const roles = ['admin', 'user'];
 
-        return (
-            <div className='container-sm userform'>
-                <Form className='cardform' onSubmit={handleRegister} ref={form}>
+    return (
+        <div className='container-sm userform'>
+            <Form className='cardform' onSubmit={handleRegister} ref={form}>
                 {!successful && (
-                <div>
-                <div className='form-group'>
-                    <label htmlFor='name'>Имя</label>
-                        <Input
-                            type='text'
-                            className='form-control'
-                            name='name'
-                            value={name}
-                            onChange={onChangeName}
-                            validations={[required, vusername]}
-                        />
-                    </div>
-                    <div className='form-group'>
-                    <label htmlFor='surname'>Фамилия</label>
-                        <Input
-                            type='text'
-                            className='form-control'
-                            name='surname'
-                            value={surname}
-                            onChange={onChangeSurname}
-                            validations={[required, vusername]}
-                        />
-                    </div>
-                    <div className='form-group'>
-                    <label htmlFor='username'>Логин</label>
-                        <Input
-                            type='text'
-                            className='form-control'
-                            name='username'
-                            value={username}
-                            onChange={onChangeUsername}
-                            validations={[required, vusername]}
-                        />
-                    </div>
-                    
-                    <div className='form-group'>
-                    <label htmlFor='email'>Email</label>
-                        <Input
-                            type='text'
-                            className='form-control'
-                            name='email'
-                            value={email}
-                            onChange={onChangeEmail}
-                            validations={[required, validEmail]}
-                        />
-                    </div>
-                    
-                    <div className='form-group'>
-                    <label htmlFor='phone'>Номер телефона</label>
-                        <Input
-                            type='text'
-                            className='form-control'
-                            name='phone'
-                            value={phone}
-                            onChange={onChangePhone}
-                            validations={[required]}
-                        />
-                    </div>
+                    <div>
+                        <InputGroup className="form-group mb-3">
+                            <label htmlFor='name'>Имя</label>
+                            <Input
+                                type='text'
+                                className='form-control'
+                                name='name'
+                                value={name}
+                                onChange={onChangeName}
+                                validations={[required]}
+                            />
+                            <label htmlFor='surname'>Фамилия</label>
+                            <Input
+                                type='text'
+                                className='form-control'
+                                name='surname'
+                                value={surname}
+                                onChange={onChangeSurname}
+                                validations={[required]}
+                            />
+                        </InputGroup>
 
-                    <div className='form-group'>
-                    <label htmlFor='role'>Роль в системе</label>
-                        <Select 
-                            name='role'
-                            className='form-control'
-                            onChange={onChangeRole} 
-                            validations={[required]} 
-                        >
-                            <RoleList />
-                        </Select>
-                    </div>
+                        <div className='form-group'>
+                            <label htmlFor='phone'>Номер телефона</label>
+                            <Input
+                                type='text'
+                                className='form-control'
+                                name='phone'
+                                value={phone}
+                                onChange={onChangePhone}
+                                validations={[required]}
+                            />
+                        </div>
 
-                    <div className='form-group'>
-                    <label htmlFor='password'>Пароль</label>
-                        <Input
-                            type='password'
-                            className='form-control'
-                            name='password'
-                            value={password}
-                            onChange={onChangePassword}
-                            validations={[required, vpassword]}
-                        />
+                        <div className='form-group'>
+                            <label htmlFor='salary'>Зарплата</label>
+                            <Input
+                                type='salary'
+                                className='form-control'
+                                name='salary'
+                                value={salary}
+                                onChange={onChangeSalary}
+                                validations={[required]}
+                            />
+                        </div>
+                        
+                        <InputGroup className="form-group mb-3">
+                            <label htmlFor='username'>Логин</label>
+                            <Input
+                                type='text'
+                                className='form-control'
+                                name='username'
+                                value={username}
+                                onChange={onChangeUsername}
+                                validations={[required, vusername]}
+                            />
+                            <label htmlFor='email'>Email</label>
+                            <Input
+                                type='text'
+                                className='form-control'
+                                name='email'
+                                value={email}
+                                onChange={onChangeEmail}
+                                validations={[required, validEmail]}
+                            />
+                        </InputGroup>
+
+                        
+                    <InputGroup className="form-group mb-3">
+                            <label htmlFor='role'>Роль в системе</label>
+                            <Select
+                                name='role'
+                                className='form-control'
+                                onChange={onChangeRole}
+                                validations={[required]}
+                            >
+                                <RoleList />
+                            </Select>
+
+                            <label htmlFor='password'>Пароль</label>
+                            <Input
+                                type='password'
+                                className='form-control'
+                                name='password'
+                                value={password}
+                                onChange={onChangePassword}
+                                validations={[required, vpassword]}
+                            />
+                    </InputGroup>
+
+                        <div className='form-group buttons'>
+                            <button className='btn btn-outline-success '>Добавить</button>
+                            <Link className='linkback' to='/user' >Вернуться назад</Link>
+                        </div>
                     </div>
-                    
-                    <div className='form-group buttons'>
-                        <button className='btn btn-outline-success '>Добавить</button>
-                        <Link className='linkback' to='/user' >Вернуться назад</Link>    
-                    </div>
-                </div>
                 )}
 
                 {message && (
-                        <div className='form-group message'>
-                            <div className={ successful ? 'alert alert-success' : 'alert alert-danger' } role='alert'>
-                                {message}
-                            </div>
-                            <Link className='linkback' to='/user' >Вернуться назад</Link>    
+                    <div className='form-group message'>
+                        <div className={successful ? 'alert alert-success' : 'alert alert-danger'} role='alert'>
+                            {message}
                         </div>
+                        <Link className='linkback' to='/user' >Вернуться назад</Link>
+                    </div>
                 )}
-                <CheckButton style={{ display: 'none' }} ref={checkBtn}/>
+                <CheckButton style={{ display: 'none' }} ref={checkBtn} />
 
-                </Form>
-            </div>
-        );
+            </Form>
+        </div>
+    );
 };
 
 

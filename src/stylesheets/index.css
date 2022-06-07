@@ -13,7 +13,8 @@ code {
 }
 
 html,body, #root{
-  background-color: #f7f7f7;
+  background-color: #f7f7f7; 
+  /*background-color: #dbe7e4;*/
   height: 100%;
   width:auto;
 }

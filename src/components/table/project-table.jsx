@@ -21,7 +21,7 @@ const ProjectTable = () => {
             <div className='projecttable'>
                 <h3>Проекты</h3>
                 <Table striped bordered hover responsive>
-                    
+
                     <thead >
                         <tr >
                             <th >Название</th>

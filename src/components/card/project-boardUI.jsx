@@ -9,16 +9,14 @@ import '../../stylesheets/projectUI.css';
 import TaskCard from './task-cardUI';
 
 const ProjectBoardUI = (props) => {
-    
-    return(
+
+    return (
         <>
             <div className='head'>
                 <h5>{props.title}</h5>
 
                 <div className='icon'>
-                    <button  onClick={props.linkDEL} className='button-delete'>
-                        <img src={Trash} alt='del' />
-                    </button>
+                    <img src={Trash} alt='del' onClick={props.linkDEL} className='button-delete'/>
 
                     <Link to={props.linkADD} className='button-add'>
                         <img src={Add} alt='add' />

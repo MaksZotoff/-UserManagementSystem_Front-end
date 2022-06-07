@@ -10,11 +10,12 @@ import './stylesheets/App.css'
 import darkStyles from './stylesheets/darkStyle';
 
 import Switch from '@material-ui/core/Switch';
-import logo from './materials/logo.png';
+import logo from './materials/logo_blue.png';
 
 import Login from './components/login.component';
 import Home from './components/home.component';
 import Profile from './components/profile.component';
+import UserProfile from './components/user-profile.component';
 import NotFound from './components/notFound.component'
 
 import BoardAdmin from './components/board/admin-board.component';
@@ -35,29 +36,24 @@ import Task from './components/card/taskUI';
 const App = () => {
   const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
-
   useEffect(() => {
     const user = AuthService.getCurrentUser();
     if (user) {
       setCurrentUser(user);
       setShowAdminBoard(user.roles.includes('ROLE_ADMIN'));
     }
-
     if (window[`localStorage`] !== null) {
       window.localStorage.getItem(`theme`) === `dark`
         ? switchDarkTheme()
         : window.localStorage.setItem(`theme`, `light`)
     }
-
   }, []);
-
   const switchDarkTheme = () =>{
     window.localStorage.setItem(`theme`, `dark`)
     const style = document.createElement(`style`)
     document.head.appendChild(style)
     style.innerHTML = darkStyles
   }
-
   const logOut = () => {
     AuthService.logout();
   };
@@ -65,123 +61,97 @@ const App = () => {
   return(
       <>
       <nav className='navbar navbar-expand navbar-dark bg-dark '>
-                <div className='navbar-nav'>
-                  <a className='navbar-brand' href='/'>
-                    <img src={logo} width='60' height='60' alt='' / >
-                  </a>
-                    <li className='nav-item'> 
-                      <Link to={'/'} className='nav-link'>Главная</Link>
-                    </li>
-                  
-                </div>
-
-            
-              {showAdminBoard && (
-                <>
-                <div className='navbar-nav'>
-                  <li className='nav-item'> 
-                      <Link to={'/admin'} className='nav-link'>Панель управления</Link> 
-                  </li>
-
-                  </div>
-
-                  <div className='navbar-nav'>
-                  <li className='nav-item'> 
-                      <Link to={'/user'} className='nav-link'>Сотрудники</Link> 
-                  </li>
-
-                  <li className='nav-item'> 
-                      <Link to={'/task'} className='nav-link'>Задачи</Link> 
-                  </li>
-                </div>
-              </>
-              )}
-
-              {currentUser && (
-                <div className='navbar-nav'>
-
-                  <li className='nav-item'> 
-                      <Link to={'/brief'} className='nav-link'>Список задач</Link>  
-                  </li> 
-
-                  <li className='nav-item'> 
-                      <Link to={'/project'} className='nav-link'>Проекты</Link>  
-                  </li>
-
-                </div>
-              )}
-            
-              
-              {currentUser ? (
-                <>
-                <div className='navbar-nav'>
-                        <li className='nav-item'> 
-                            <Link to={'/profile'} className='nav-link'> Профиль</Link>
-                        </li>
-
-                        <li className='nav-item'> 
-                            <a href='/login' className='nav-link' onClick={logOut}>Выйти</a>
-                        </li>
-                </div>
-                </>
-              ) : (
-                    <div className='navbar-nav'>
-                        <li className='nav-item'> 
-                            <Link to={'/login'} className='nav-link'>Войти</Link>
-                        </li>
-                    </div>
-              )}
-
-              <div className='navbar-nav'> 
-                    <Switch 
-                        name = 'theme'
-                        onChange={()=>{
-                          if(window.localStorage.getItem('theme') === 'dark'){
-                            window.localStorage.setItem('theme', 'light')
-                          } else{
-                            window.localStorage.setItem('theme', 'dark')
-                          }
-                          window.location.reload()
-                        }}
-                        checked={window.localStorage.getItem('theme')=== 'dark'}
-                    /> 
-                    <div style={{color:'#FFFFFF80', fontSize:'16px'}}> тёмная тема</div>
-              </div>
-      </nav>
-
-            <div className='main mx-3 mt-5'>
-              <Routes>
-                <Route exact path='/' element={<Home/>} />
-                <Route exact path='/login' element={<Login/>} />
-                <Route exact path='/profile' element={<Profile/>} />
-
-                <Route exact path='/admin' element={<BoardAdmin/>} />
-                <Route exact path ='/user' element={<UserBoard/>} />
-                <Route exact path='/task' element={<TaskBoard/>}/>                
-                <Route exact path='/project' element={<ProjectBoard/>} /> 
-                <Route exact path='/brief' element={<BriefBoard/>}/>               
-
-                <Route exact path='/adduser' element={<AddUserForm/>} />
-                <Route exact path='/addproject' element={<AddProjectForm/>} />
-                <Route exact path='/addtask' element={<AddTaskForm/>} />
-
-                <Route exact path='/user/update/:id' element={<EditUser/>} />      
-                <Route exact path='/project/update/:id' element={<EditProject/>} />            
-                <Route exact path='/task/update/:id' element={<Task/>}/>
-                
-                <Route exact path='*' element={<NotFound/>} />
-
-              </Routes>
-            </div>
+        <div className='navbar-nav'>
+          <a className='navbar-brand' href='/'>
+            <img src={logo} width='60' height='60' alt='' / >
+          </a>
+            <li className='nav-item'> 
+              <Link to={'/'} className='nav-link'>Главная</Link>
+            </li>
+        </div>
+      {showAdminBoard && (
+        <>
+        <div className='navbar-nav'>
+          <li className='nav-item'> 
+              <Link to={'/admin'} className='nav-link'>Панель управления</Link> 
+          </li>
+          </div>
+          <div className='navbar-nav'>
+          <li className='nav-item'> 
+              <Link to={'/user'} className='nav-link'>Сотрудники</Link> 
+          </li>
+          <li className='nav-item'> 
+              <Link to={'/task'} className='nav-link'>Задачи</Link> 
+          </li>
+        </div>
       </>
+      )}
+      {currentUser && (
+        <div className='navbar-nav'>
+          <li className='nav-item'> 
+            <Link to={'/brief'} className='nav-link'>Персональные задачи</Link>  
+          </li> 
+          <li className='nav-item'> 
+            <Link to={'/project'} className='nav-link'>Проекты</Link>  
+          </li>
+        </div>
+      )}
+      {currentUser ? (
+        <>
+        <div className='navbar-nav'>
+          <li className='nav-item'> 
+              <Link to={'/profile'} className='nav-link'> Профиль</Link>
+          </li>
+          <li className='nav-item'> 
+              <a href='/login' className='nav-link' onClick={logOut}>Выйти</a>
+          </li>
+        </div>
+        </>
+      ) : (
+        <div className='navbar-nav'>
+            <li className='nav-item'> 
+                <Link to={'/login'} className='nav-link'>Войти</Link>
+            </li>
+        </div>
+      )}
+      <div className='navbar-nav'> 
+        <Switch 
+            name = 'theme'
+            onChange={()=>{
+              if(window.localStorage.getItem('theme') === 'dark'){
+                window.localStorage.setItem('theme', 'light')
+              } else{   window.localStorage.setItem('theme', 'dark')
+              }
+              window.location.reload()
+            }}
+            checked={window.localStorage.getItem('theme')=== 'dark'}
+        /> 
+        <div style={{color:'#FFFFFF80', fontSize:'16px'}}>Тема</div>
+      </div>
+      </nav>
+      <div className='main mx-3 mt-5'>
+        <Routes>
+          <Route exact path='/' element={<Home/>} />
+          <Route exact path='/login' element={<Login/>} />
+          <Route exact path='/profile' element={<Profile/>} />
+          <Route exact path='/user/:id' element={<UserProfile/>} />      
 
+          <Route exact path='/admin' element={<BoardAdmin/>} />
+          <Route exact path ='/user' element={<UserBoard/>} />
+          <Route exact path='/task' element={<TaskBoard/>}/>                
+          <Route exact path='/project' element={<ProjectBoard/>} /> 
+          <Route exact path='/brief' element={<BriefBoard/>}/>               
+          <Route exact path='/adduser' element={<AddUserForm/>} />
+          <Route exact path='/addproject' element={<AddProjectForm/>} />
+          <Route exact path='/addtask' element={<AddTaskForm/>} />
+          <Route exact path='/user/update/:id' element={<EditUser/>} />      
+          <Route exact path='/project/update/:id' element={<EditProject/>} />            
+          <Route exact path='/task/update/:id' element={<Task/>}/>
+          <Route exact path='*' element={<NotFound/>} />
 
+        </Routes>
+      </div>
+      </>
   );
 };
-
 export default App;
-
-
-
-
-

@@ -30,24 +30,24 @@ const ProjectBoard = () => {
     const deleteProject = (project, index) => {
         ProjectService.remove(currentProject.id_project)
             .then(response => {
-            console.log(response.data);
-            retrieveProjects();
-        })
-        .catch(e => {
-            console.log(e);
-        });
+                console.log(response.data);
+                retrieveProjects();
+            })
+            .catch(e => {
+                console.log(e);
+            });
     };
 
 
     return (
         <>
             <div className='projectlist'>
-                { projects.map((project, index) => ( 
-                    <div 
+                {projects.map((project, index) => (
+                    <div
                         className={
-                            'col-md-3 chapter' + (index === currentIndex ? '-active': '' )
+                            'col-md-3 chapter' + (index === currentIndex ? '-active' : ` ${index+1}`)
                         }
-                        onClick={()=> setActiveProject(project, index) }
+                        onClick={() => setActiveProject(project, index)}
                         key={index}
                     >
                         <ProjectBoardUI 
@@ -58,6 +58,7 @@ const ProjectBoard = () => {
                     </div>
                 ))}
             </div>
+            <br/>
 
             <div className='col-md-3 chapter'>
                 <div className='head'>

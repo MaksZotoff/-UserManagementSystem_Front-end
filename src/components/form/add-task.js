@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import TaskService from '../../services/task.service';
 
@@ -20,7 +20,7 @@ const required = (value) => {
     }
 };
 
-const AddTaskForm = () =>{
+const AddTaskForm = () => {
     const form = useRef();
     const checkBtn = useRef();
     const [title, setTitle] = useState('');
@@ -28,23 +28,23 @@ const AddTaskForm = () =>{
     const [successful, setSuccessful] = useState(false);
     const [message, setMessage] = useState('');
 
-        const [project, setProject] = useState(1)
-        const [relevant, setRelevant] = useState(true) 
-        const [date_start, setDateStart] = useState('')
-        const [date_end, setDateEnd] = useState('')
+    const [project, setProject] = useState('')
+    const [relevant, setRelevant] = useState(true)
+    const [date_start, setDateStart] = useState('')
+    const [date_end, setDateEnd] = useState('')
 
-        const onChangeTitle = (e) => {
-            const title = e.target.value;
-            setTitle(title);
-        };
-        const onChangeDateStart = (e) => {
-            const date_start = e.target.value;
-            setDateStart(date_start);
-        };
-        const onChangeDateEnd = (e) => {
-            const date_end = e.target.value;
-            setDateEnd(date_end);
-        };
+    const onChangeTitle = (e) => {
+        const title = e.target.value;
+        setTitle(title);
+    };
+    const onChangeDateStart = (e) => {
+        const date_start = e.target.value;
+        setDateStart(date_start);
+    };
+    const onChangeDateEnd = (e) => {
+        const date_end = e.target.value;
+        setDateEnd(date_end);
+    };
 
     const handleAddTask = (e) => {
         e.preventDefault();
@@ -55,79 +55,79 @@ const AddTaskForm = () =>{
                 setMessage(response.data.message);
                 setSuccessful(true);
             },
-            (error) => {
-                const resMessage =
-                    (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                    error.message ||
-                    error.toString();
+                (error) => {
+                    const resMessage =
+                        (error.response &&
+                            error.response.data &&
+                            error.response.data.message) ||
+                        error.message ||
+                        error.toString();
                     setMessage(resMessage);
                     setSuccessful(false);
-            }
+                }
             );
         }
     };
 
-        return (
-            <div className='container-sm userform'>
-                <Form className='cardform' onSubmit={handleAddTask} ref={form}>
+    return (
+        <div className='container-sm userform'>
+            <Form className='cardform' onSubmit={handleAddTask} ref={form}>
                 {!successful && (
-                <div>
-                    <div className='form-group'>
-                    <label htmlFor='title'>Наименование задачи</label>
-                        <Input
-                            type='text'
-                            className='form-control'
-                            name='title'
-                            value={title}
-                            onChange={onChangeTitle}
-                            validations={[required]}
-                        />
+                    <div>
+                        <div className='form-group'>
+                            <label htmlFor='title'>Наименование задачи</label>
+                            <Input
+                                type='text'
+                                className='form-control'
+                                name='title'
+                                value={title}
+                                onChange={onChangeTitle}
+                                validations={[required]}
+                            />
+                        </div>
+
+                        <div className='form-group'>
+                            <label htmlFor='date_start'>Дата начала</label>
+                            <Input
+                                type='date'
+                                className='form-control'
+                                name='date_start'
+                                value={date_start}
+                                onChange={onChangeDateStart}
+                                validations={[required]}
+                            />
+                        </div>
+
+                        <div className='form-group'>
+                            <label htmlFor='date_end'>Дата окончания</label>
+                            <Input
+                                type='date'
+                                className='form-control'
+                                name='date_end'
+                                value={date_end}
+                                onChange={onChangeDateEnd}
+                                validations={[required]}
+                            />
+                        </div>
+
+                        <div className='form-group buttons'>
+                            <button className='btn btn-outline-success '>Добавить</button>
+                            <Link className='linkback' to='/project' >Вернуться назад</Link>
+                        </div>
                     </div>
-                    
-                    <div className='form-group'>
-                    <label htmlFor='date_start'>Дата начала</label>
-                        <Input
-                            type='date'
-                            className='form-control'
-                            name='date_start'
-                            value={date_start}
-                            onChange={onChangeDateStart}
-                            validations={[required]}
-                        />
-                    </div>
-                    
-                    <div className='form-group'>
-                    <label htmlFor='date_end'>Дата окончания</label>
-                        <Input
-                            type='date'
-                            className='form-control'
-                            name='date_end'
-                            value={date_end}
-                            onChange={onChangeDateEnd}
-                            validations={[required]}
-                        />
-                    </div>
-                    
-                    <div className='form-group buttons'>
-                        <button className='btn btn-outline-success '>Добавить</button>
-                        <Link className='linkback' to='/project' >Вернуться назад</Link>    
-                    </div>
-                </div>
                 )}
                 {message && (
                     <div className='form-group message'>
-                        <div className={ successful ? 'alert alert-success' : 'alert alert-danger' } role='alert'>
+                        <div className={successful ? 'alert alert-success' : 'alert alert-danger'} role='alert'>
                             {message}
                         </div>
-                        <Link className='linkback' to='/project' >Вернуться назад</Link>    
+                        <Link className='linkback' to='/project' >Вернуться назад</Link>
                     </div>
                 )}
-                <CheckButton style={{ display: 'none' }} ref={checkBtn}/>
-                </Form>
-            </div>
-        );
+                <CheckButton style={{ display: 'none' }} ref={checkBtn} />
+            </Form>
+        </div>
+    );
 };
 
 export default AddTaskForm

@@ -170,3 +170,12 @@ margin: 40px 0 20px;
     align-items: flex-start;
 }
 
+
+.input-group {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+    justify-content: space-between!important;
+}

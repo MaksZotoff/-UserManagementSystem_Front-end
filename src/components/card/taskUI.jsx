@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import TaskService from '../../services/task.service';
 
@@ -24,7 +24,7 @@ const required = (value) => {
 
 const TaskCard = props => {
 
-    const { id_task }= useParams();
+    const { id_task } = useParams();
     let navigate = useNavigate();
 
     const initialTasklState = {
@@ -37,8 +37,8 @@ const TaskCard = props => {
     const [currentTask, setCurrentTask] = useState(initialTasklState);
     const [message, setMessage] = useState("");
 
-        const getTask = id_task => {
-            TaskService.findOne(id_task)
+    const getTask = id_task => {
+        TaskService.findOne(id_task)
             .then(response => {
                 setCurrentTask(response.data);
                 console.log(response.data);
@@ -46,27 +46,27 @@ const TaskCard = props => {
             .catch(e => {
                 console.log(e);
             });
-        };
+    };
 
-        useEffect(() => {
-            if (id_task)
+    useEffect(() => {
+        if (id_task)
             getTask(id_task);
-        }, [id_task]);
+    }, [id_task]);
 
-        const handleInputChange = event => {
-            const { name, value } = event.target;
-            setCurrentTask({ ...currentTask, [name]: value });
+    const handleInputChange = event => {
+        const { name, value } = event.target;
+        setCurrentTask({ ...currentTask, [name]: value });
+    };
+
+    const updateRelevant = status => {
+        var data = {
+            id_task: currentTask.id_task,
+            title: currentTask.title,
+            date_start: currentTask.date_start,
+            date_end: currentTask.date_end,
+            relevant: status
         };
-
-        const updateRelevant = status => {
-            var data = {
-                id_task: currentTask.id_task,
-                title: currentTask.title,
-                date_start: currentTask.date_start,
-                date_end: currentTask.date_end,
-                relevant: status
-            };
-            TaskService.update(currentTask.id_task, data)
+        TaskService.update(currentTask.id_task, data)
             .then(response => {
                 setCurrentTask({ ...currentTask, relevant: status });
                 console.log(response.data);
@@ -74,10 +74,10 @@ const TaskCard = props => {
             .catch(e => {
                 console.log(e);
             });
-        };
+    };
 
-        const updateTask = () => {
-            TaskService.update(currentTask.id_task, currentTask)
+    const updateTask = () => {
+        TaskService.update(currentTask.id_task, currentTask)
             .then(response => {
                 console.log(response.data);
                 setMessage("Задача обновлена успешно");
@@ -85,20 +85,20 @@ const TaskCard = props => {
             .catch(e => {
                 console.log(e);
             });
-        };
+    };
 
-        const deleteTask = () => {
-            TaskService.remove(currentTask.id_task)
-                .then(response => {
+    const deleteTask = () => {
+        TaskService.remove(currentTask.id_task)
+            .then(response => {
                 console.log(response.data);
                 navigate("/task");
             })
             .catch(e => {
                 console.log(e);
             });
-        };
+    };
 
-        return(
+    return (
         <>
             {currentTask ? (
                 <div className='container-sm userform'>
@@ -151,24 +151,24 @@ const TaskCard = props => {
                     </Form>
 
                     <div className='form-group buttons'>
-                            {currentTask.relevant ? (
-                                <button className="btn btn-outline-primary" onClick={() => updateRelevant(false)}>
-                                    Изменить статус
-                                </button>
-                            ) : (
-                                <button className="btn btn-outline-primary" onClick={() => updateRelevant(true)}>
-                                    Выполнена
-                                </button>
-                            )}
-                            <button className="btn btn-outline-danger" onClick={deleteTask}>
-                                Удалить задачу
+                        {currentTask.relevant ? (
+                            <button className="btn btn-outline-primary" onClick={() => updateRelevant(false)}>
+                                Изменить статус
                             </button>
+                        ) : (
+                            <button className="btn btn-outline-primary" onClick={() => updateRelevant(true)}>
+                                Выполнена
+                            </button>
+                        )}
+                        <button className="btn btn-outline-danger" onClick={deleteTask}>
+                            Удалить задачу
+                        </button>
 
-                            <button type="submit" className="btn btn-outline-success" onClick={updateTask}>
-                                Обновить
-                            </button>
-                            
-                            <Link className='linkback' to='/task' >Вернуться назад</Link>    
+                        <button type="submit" className="btn btn-outline-success" onClick={updateTask}>
+                            Обновить
+                        </button>
+
+                        <Link className='linkback' to='/task' >Вернуться назад</Link>
 
                     </div>
                     <p>{message}</p>
@@ -179,7 +179,7 @@ const TaskCard = props => {
                     <p>Выберите задачу</p>
                 </div>
             )}
-            </>
-        );
+        </>
+    );
 };
 export default TaskCard;

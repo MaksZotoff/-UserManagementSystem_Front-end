@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import TaskService from '../../services/project.service';
 import Table from 'react-bootstrap/Table'
 import '../../stylesheets/cardUI.css';
@@ -22,7 +22,7 @@ const TaskTable = () => {
             <div className='projecttable'>
                 <h3>Проекты</h3>
                 <Table striped bordered hover responsive>
-                    
+
                     <thead >
                         <tr >
                             <th >Название</th>
@@ -37,10 +37,10 @@ const TaskTable = () => {
                     </tbody>
                 </Table>
                 <div className='form-group buttons'>
-                        <button id='projectbuttons' className='btn btn-outline-secondary'>Завершено</button>
-                        <button id='projectbuttons' className='btn btn-outline-secondary'>Актуально</button>
-    
-                    </div>
+                    <button id='projectbuttons' className='btn btn-outline-secondary'>Завершено</button>
+                    <button id='projectbuttons' className='btn btn-outline-secondary'>Актуально</button>
+
+                </div>
             </div>
         </>
 

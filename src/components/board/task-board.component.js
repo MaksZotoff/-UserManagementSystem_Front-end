@@ -1,11 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
 import TaskService from '../../services/task.service';
 import { Link } from 'react-router-dom';
-
-import Delete from '../../materials/icons/delete-black.png';
-import CheckCompleteTrue from '../../materials/icons/check-circle-complete.png';
-import CheckCompleteFalse from '../../materials/icons/check-circle.png';
 import '../../stylesheets/projectUI.css';
 
 const TaskList = () => {
@@ -13,8 +8,6 @@ const TaskList = () => {
     const [currentTask, setCurrentTask] = useState(null);
     const [currentIndex, setCurrentIndex] = useState(-1);
     
-    const { id_task }= useParams();
-
     useEffect(() => {
         retrieveTasks();
     }, []);
@@ -52,12 +45,9 @@ const TaskList = () => {
             <div className="col-md-8">
                 <h4>Всего задач:</h4>
                 <ul className="list-group">
-                    {tasks &&
-                        tasks.map((task, index) => (
+                    {tasks && tasks.map((task, index) => (
                             <li
-                                className={
-                                    "list-group-item " + (index === currentIndex ? "active" : "")
-                                }
+                                className={"list-group-item " + (index === currentIndex ? "active" : "")}
                                 onClick={() => setActiveTask(task, index)}
                                 key={index}
                             >

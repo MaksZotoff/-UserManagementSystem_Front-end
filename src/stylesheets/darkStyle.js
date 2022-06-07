@@ -1,4 +1,4 @@
-const darkStyles = 
+const darkStyles =
     `
     html {
         background-color: rgb(24, 26, 27); !important;
@@ -2368,7 +2368,6 @@ const darkStyles =
         background-color: #0f3a48 !important;
     }
     embed[type='application/pdf'] { filter: invert(100%) contrast(90%); }
-
 
     `
 

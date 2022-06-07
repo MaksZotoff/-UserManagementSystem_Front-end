@@ -7,7 +7,7 @@ import ProjectService from '../../services/project.service';
 import InformCardUI from '../card/inform-cardUI';
 import UserTable from '../table/user-table';
 import ProjectTable from '../table/project-table';
-import UserChart from '../chart/user-chart';
+import TaskChart from '../chart/task-chart';
 
 import '../../stylesheets/cardUI.css';
 
@@ -53,10 +53,11 @@ const BoardAdmin = () => {
             </div>
 
             <div className='container d-flex'>
-                <UserTable/>
-                <ProjectTable/>
+                <UserTable />
+                <ProjectTable />
             </div>
-            <UserChart/>
+            <TaskChart />
+
         </>
     );
 };
