@@ -61,7 +61,7 @@
 
 .head > .icon > .button-delete > img,
 .head > .icon > .button-add > img {
-  width: 37%;
+  width: 45%;
 }
 
 .title > .button-delete > img,
@@ -69,5 +69,5 @@
   width: 80%;
 }
 .head > .icon > img {
-  width: 18%;
+  width: 26%;
 }

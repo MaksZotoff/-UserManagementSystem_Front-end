@@ -2,6 +2,9 @@ label {
   display: block;
   margin-top: 10px;
 }
+.main{
+  padding-top: 3%;
+}
 
 .jumbotron {
   margin-bottom: 2rem;
@@ -16,7 +19,14 @@ label {
     background-color: #145653!important;
 }
 */
-
+.dropdown-menu{
+  background: #343a40;
+}
+/*
+.navbar-expand-lg .navbar-collaps{
+  justify-content: space-between!important;
+}
+*/
 .navbar-nav {
   cursor: default;
   margin: 0 15px;

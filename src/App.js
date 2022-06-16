@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import {  Route, Routes, Link } from 'react-router-dom';
 import AuthService from './services/auth.service';
+import {Nav, Navbar, NavDropdown, Container } from 'react-bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.css';
@@ -10,28 +11,36 @@ import './stylesheets/App.css'
 import darkStyles from './stylesheets/darkStyle';
 
 import Switch from '@material-ui/core/Switch';
-import logo from './materials/logo_blue.png';
+import logo from './materials/line_logo_white.png';
 
 import Login from './components/login.component';
 import Home from './components/home.component';
-import Profile from './components/profile.component';
-import UserProfile from './components/user-profile.component';
+import UserProfile from './components/boards/profile-board.component';
 import NotFound from './components/notFound.component'
 
-import BoardAdmin from './components/board/admin-board.component';
-import UserBoard from './components/board/user-board.component';
-import ProjectBoard from './components/board/project-board.component';
-import TaskBoard from './components/board/task-board.component';
-import BriefBoard from './components/board/brief-board.component';
+import BoardAdmin from './components/boards/admin-board.component';
+import UserBoard from './components/boards/user-board.component';
+import ProjectBoard from './components/boards/project-board.component';
+import TaskBoard from './components/boards/task-board.component';
+import BriefBoard from './components/boards/brief-board.component';
 
-import AddUserForm from './components/form/add-user';
-import AddProjectForm from './components/form/add-project';
-import AddTaskForm from './components/form/add-task';
+import AddUserForm from './components/forms/add-user';
+import AddProjectForm from './components/forms/add-project';
+import AddTaskForm from './components/forms/add-task';
 
-import EditUser from './components/form/edit-user';
-import EditProject from './components/form/edit-project';
+import EditUser from './components/forms/edit-user';
+import EditProject from './components/forms/edit-project';
 
-import Task from './components/card/taskUI';
+import Task from './components/cards/taskUI';
+
+
+
+import Board from './components/boards/projects/board';
+
+
+
+
+
 
 const App = () => {
   const [showAdminBoard, setShowAdminBoard] = useState(false);
@@ -60,6 +69,7 @@ const App = () => {
 
   return(
       <>
+
       <nav className='navbar navbar-expand navbar-dark bg-dark '>
         <div className='navbar-nav'>
           <a className='navbar-brand' href='/'>
@@ -100,7 +110,7 @@ const App = () => {
         <>
         <div className='navbar-nav'>
           <li className='nav-item'> 
-              <Link to={'/profile'} className='nav-link'> Профиль</Link>
+              <Link to={`/user/${currentUser.id}`} className='nav-link'> Профиль</Link>
           </li>
           <li className='nav-item'> 
               <a href='/login' className='nav-link' onClick={logOut}>Выйти</a>
@@ -129,13 +139,53 @@ const App = () => {
         <div style={{color:'#FFFFFF80', fontSize:'16px'}}>Тема</div>
       </div>
       </nav>
-      <div className='main mx-3 mt-5'>
+
+{/*
+<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Container>
+        <Navbar.Brand href="/">
+            <img src={logo} width='60' height='60' alt='' / >
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav" className='justify-content: space-between'>
+            <Nav  className="me-auto">
+                {currentUser && (
+                <>
+                    <Nav.Link><Link to={'/brief'}>Персональные задачи</Link></Nav.Link>
+                    <Nav.Link><Link to={'/project'}>Проекты</Link></Nav.Link>
+                </>
+                )}
+                {showAdminBoard && (
+                <NavDropdown bg="dark" variant="dark" title="Управление" id="collasible-nav-dropdown">
+                    <NavDropdown.Item><Link to={'/admin'}>Панель управления</Link></NavDropdown.Item>
+                    <NavDropdown.Item><Link to={'/user'}>Сотрудники</Link></NavDropdown.Item>
+                    <NavDropdown.Item><Link to={'/task'}>Задачи</Link></NavDropdown.Item>
+                </NavDropdown>
+                )}
+
+            </Nav>
+            <Nav>
+            {currentUser ? (
+                <>
+                    <Nav.Link><Link to={`/user/${currentUser.id}`}>Профиль</Link></Nav.Link>
+                    <Nav.Link href='/login' className='nav-link' onClick={logOut}>Выйти</Nav.Link>
+                </>
+                ) : (
+                <>
+                    <Nav.Link><Link to={`login`}>Войти</Link></Nav.Link> 
+                </>
+                )}
+                
+            </Nav>
+        </Navbar.Collapse>
+        
+    </Container>
+</Navbar>
+*/}
         <Routes>
           <Route exact path='/' element={<Home/>} />
           <Route exact path='/login' element={<Login/>} />
-          <Route exact path='/profile' element={<Profile/>} />
           <Route exact path='/user/:id' element={<UserProfile/>} />      
-
           <Route exact path='/admin' element={<BoardAdmin/>} />
           <Route exact path ='/user' element={<UserBoard/>} />
           <Route exact path='/task' element={<TaskBoard/>}/>                
@@ -149,8 +199,10 @@ const App = () => {
           <Route exact path='/task/update/:id' element={<Task/>}/>
           <Route exact path='*' element={<NotFound/>} />
 
+          <Route exact path='/board' element={<Board/>} />
+
         </Routes>
-      </div>
+
       </>
   );
 };

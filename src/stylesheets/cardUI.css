@@ -179,3 +179,23 @@ margin: 40px 0 20px;
     width: 100%;
     justify-content: space-between!important;
 }
+
+
+.list-group-brief {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px;
+}
+.form-group-brief{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.submitformbrief{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+}

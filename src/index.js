@@ -7,11 +7,15 @@ import App from './App';
 import './stylesheets/index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import store from "./components/boards/projects/service/store";
+import { Provider } from "react-redux";
 
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
+ 
+  <BrowserRouter> <Provider store={store}>
+    <App /></Provider>
   </BrowserRouter>,
+  
   document.getElementById('root')
 );
 

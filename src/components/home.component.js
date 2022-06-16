@@ -1,12 +1,12 @@
 import React, {  } from 'react';
-import MainCardUI from '../components/card/main-cardUI';
+import MainCardUI from './cards/main-cardUI';
 
 import '../stylesheets/cardUI.css';
 import '../stylesheets/App.css';
 
 const Home = () => {
   return (
-    <div className='container-fluid'>
+    <div className='main container-fluid'>
       <div className='row'>
         <div className='col-md-4'>
           <MainCardUI link='/project' title='Проекты' />
